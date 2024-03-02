@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -9,9 +10,9 @@ function Navbar() {
     <nav className='navbar'>
         <div className='navbar-container'>
             
-            <a href ="/" className="navbar-logo">
+            <Link to="/" className="navbar-logo">
                 AIO <i class="fa-solid fa-pen"></i>
-            </a>
+            </Link>
             
             <div className='menu-icon' onClick={handleClick}>
                 <i class="fa-solid fa-bars"></i>
@@ -21,15 +22,15 @@ function Navbar() {
             <ul className={click ? 'nav-menu active': 'nav-menu'}>
                 
                 <li className='nav-item'>
-                    <a href ="/" className='nav-link' onClick={closeMobileMenu}>
+                    <Link to="/" className='nav-link' onClick={closeMobileMenu}>
                         Home
-                    </a>    
+                    </Link>    
                 </li>
 
                 <li className='nav-item'>
-                    <a href ="/" className='nav-link' onClick={closeMobileMenu}>
+                    <Link to="/" className='nav-link' onClick={closeMobileMenu}>
                         Profile
-                    </a>    
+                    </Link>   
                 </li> 
 
             </ul>
