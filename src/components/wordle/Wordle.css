@@ -1,4 +1,4 @@
-.App {
+.wordle {
     text-align: center;
     background-color: #121212;
     width: 100vw;
@@ -6,8 +6,3 @@
     /* display: flex; */
     color: white;
   }
-.keyboard {
-    width: 700px;
-    height: 300px;
-    margin-top: 60px;
-  }  
