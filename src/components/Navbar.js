@@ -11,7 +11,7 @@ function Navbar() {
         <div className='navbar-container'>
             
             <Link to="/" className="navbar-logo">
-                AIO <i class="fa-solid fa-pen"></i>
+                Vocable <i class="fa-solid fa-pen"></i>
             </Link>
             
             <div className='menu-icon' onClick={handleClick}>
