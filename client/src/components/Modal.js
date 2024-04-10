@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import ModeSelect from './ModeSelect';
+
 
 
 function Modal({closeModal}) {
-    
+  
+  const [selectedMode, setSelectedMode] = useState('');
+  const handleModeSelect = (mode) => {
+  setSelectedMode(mode);
+  
+};
 
   return (
     <div className="modalBackground">
@@ -17,12 +22,16 @@ function Modal({closeModal}) {
             <h1>Please select a difficulty</h1>
         </div>
         <div className="body">
-            <ModeSelect/>
+        
+        <Link to="/easy">
+            <button>Easy</button>
+            </Link>
+        <Link to="/medium">
+          <button>Medium</button>
+        </Link>    
         </div>
         <div className="footer">
-        <Link to="/wordle">
-            <button>Start</button>
-            </Link>
+        
         </div>
         </div>
   </div>

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { AppContext } from "../../../pages/Wordle";
+import { AppContext } from "./WordleEz";
+import "./Easy.css";
 
 function Letter({ letterPos, attemptVal }) {
   const { board, setDisabledLetters, currAttempt, correctWord } =

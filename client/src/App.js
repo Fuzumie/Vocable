@@ -1,7 +1,10 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from './pages/Home';
-import Wordle from './pages/Wordle';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+
+import WordleEz from "./components/wordle/easy/WordleEz";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -10,8 +13,11 @@ function App() {
       <Router>
         <Navbar/>
           <Routes>
-            <Route path='/' exact Component={Home}/>
-            <Route path='/wordle' exact Component={Wordle}/>
+            <Route path='/' element={<Login/>}/>
+            <Route path='/signup' element={<Signup/>}/>
+            <Route path='/home' element={<Home/>}/>
+            <Route path='/easy' exact Component={WordleEz}/>
+            
           </Routes>
       </Router>
     </>

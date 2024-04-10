@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "../../pages/Wordle";
+import { AppContext } from "./easy/WordleEz";
 
 function Key({ keyVal, bigKey, disabled }) {
   const { gameOver, onSelectLetter, onDelete, onEnter } =
