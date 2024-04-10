@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const Joi = require("joi");
-const passwordComplexity = require("joi-password-complexity")
+const validator = require('validator')
+const bcrypt = require('bcrypt')
 
 
 const userSchema = mongoose.Schema({
@@ -22,9 +21,7 @@ userSchema.statics.signup = async function(email, password) {
   if (!validator.isEmail(email)) {
     throw Error('Email not valid')
   }
-  if (!validator.isStrongPassword(password)) {
-    throw Error('Password not strong enough')
-  }
+  
 
   const exists = await this.findOne({ email })
 

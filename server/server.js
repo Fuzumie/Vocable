@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -68,7 +70,7 @@ app.post('/signup', async (req, res) => {
 
   const data = {
     email: email,
-    password: password // Corrected the typo here
+    password: password 
   }
 
   try {
