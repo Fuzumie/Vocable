@@ -11,8 +11,6 @@ const loginUser = async (req, res) => {
 
   try {
     const user = await User.login(email, password)
-
-    // create a token
     const token = createToken(user._id)
 
     res.status(200).json({email, token})
@@ -27,8 +25,6 @@ const signupUser = async (req, res) => {
 
   try {
     const user = await User.signup(email, password)
-
-    // create a token
     const token = createToken(user._id)
 
     res.status(200).json({email, token})
@@ -37,4 +33,37 @@ const signupUser = async (req, res) => {
   }
 }
 
-module.exports = { signupUser, loginUser }
+const getUser = async (req, res) => {
+  try {
+      const user = await User.findById(req.params.id);
+      res.status(200).send(user);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: "Internal Server Error" });
+  }
+};
+
+const updateUser = async (req, res) => {
+  const user = req.user;
+  const id = req.params.id;
+
+  try {
+      const userInfo = await User.findById(id);
+
+      if (!userInfo) {
+          return res.status(404).json({ message: "User not found" });
+      }
+
+      const updatedUserInfo = await User.findByIdAndUpdate(id, { 
+        games: req.body.games,
+        wins: req.body.wins,
+        loses: req.body.loses 
+      }, { new: true });
+      res.status(200).json(updatedUserInfo);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+module.exports = { signupUser, loginUser, getUser, updateUser }

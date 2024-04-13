@@ -4,9 +4,10 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const Word =  require('./models/wordModel')
-const userRoutes = require('./routes/userRoutes')
-const vocabRoutes = require('./routes/vocabRoutes')
+const Word =  require('./models/wordModel');
+const userRoutes = require('./routes/userRoutes');
+const vocabRoutes = require('./routes/vocabRoutes');
+const worddRoutes = require('./routes/wordRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -15,13 +16,13 @@ app.use(express.urlencoded({extended: false}));
 app.use((req, res, next) => {
   console.log(req.path, req.method)
   next()
-})
+});
 
 
 
-app.use('/api/user', userRoutes)
-app.use('/api/vocab', vocabRoutes)
-
+app.use('/api/user', userRoutes);
+app.use('/api/vocab', vocabRoutes);
+app.use('/api/words', worddRoutes);
 
 app.post('/api/word', async (req, res) => {
   try{

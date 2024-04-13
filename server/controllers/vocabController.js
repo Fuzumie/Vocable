@@ -55,7 +55,6 @@ const addWord = async (req, res) => {
             return res.status(404).json({ message: "Vocabulary not found" });
         }
 
-        // Push new word object into the words array
         vocab.words.push({ word, definitions });
         await vocab.save();
 
