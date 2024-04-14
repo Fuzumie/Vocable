@@ -10,6 +10,8 @@ const createVocab = async (req, res)=>{
         owner: user_id
     })
 
+    await User.findByIdAndUpdate(user_id, { $push: { vocabularies: vocab._id } });
+
     res.status(201).send(created_vocab)
 }
 
