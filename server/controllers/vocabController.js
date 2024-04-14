@@ -35,7 +35,7 @@ const updateVocab = async (req, res)=>{
     const user = req.user
     const id = req.params.id
 
-    const vocab = await Vocabulary.findByIdI(id)
+    const vocab = await Vocabulary.findById(id)
     
     if (vocab.owner.toString() !==user._id.toString()) {
         res.status(401)
@@ -47,15 +47,18 @@ const updateVocab = async (req, res)=>{
 }
 
 const addWord = async (req, res) => {
+    const user = req.user
+    const vocab_id = req.params.id
+    
     try {
-        const { name, word, definitions } = req.body;
-        const vocab = await Vocabulary.findOne({ name, owner: req.user._id });
+        const { word, definition } = req.body;
+        const vocab = await Vocabulary.findOne({ _id:vocab_id, owner: user._id });
 
         if (!vocab) {
             return res.status(404).json({ message: "Vocabulary not found" });
         }
 
-        vocab.words.push({ word, definitions });
+        vocab.words.push({ word, definition });
         await vocab.save();
 
         res.status(200).json({ message: "Word added successfully", vocabulary: vocab });
@@ -65,11 +68,36 @@ const addWord = async (req, res) => {
     }
 };
 
+const deleteWord = async (req, res) => {
+    const user = req.user;
+    const { vocab_id, word_id } = req.params;
+
+    try {
+        const vocab = await Vocabulary.findOne({ _id: vocab_id, owner: user._id });
+
+        if (!vocab) {
+            return res.status(404).json({ message: "Vocabulary not found" });
+        }
+
+        // Remove the word from the words array
+        vocab.words = vocab.words.filter(word => word._id.toString() !== word_id);
+        await vocab.save();
+
+        res.status(200).json({ message: "Word deleted successfully", vocabulary: vocab });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+
+
 
 module.exports = {
     createVocab,
     getVocab,
     updateVocab,
     deleteVocab,
-    addWord
+    addWord,
+    deleteWord
 }

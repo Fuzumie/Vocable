@@ -24,15 +24,6 @@ app.use('/api/user', userRoutes);
 app.use('/api/vocab', vocabRoutes);
 app.use('/api/words', worddRoutes);
 
-app.post('/api/word', async (req, res) => {
-  try{
-    const word=await Word.create(req.body);
-    res.status(200).json(word);
-  } catch(error){
-    res.status(500).json({message:error.message})
-  }
-
-});
  
 
 mongoose
