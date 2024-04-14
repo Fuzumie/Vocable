@@ -1,4 +1,5 @@
 const Vocabulary = require("../models/vocabModel");
+const User = require("..//models/userModel")
 
 const createVocab = async (req, res)=>{
     const user_id = req.user._id
@@ -10,7 +11,7 @@ const createVocab = async (req, res)=>{
         owner: user_id
     })
 
-    await User.findByIdAndUpdate(user_id, { $push: { vocabularies: vocab._id } });
+    await User.findByIdAndUpdate(user_id, { $push: { vocabularies: created_vocab._id } });
 
     res.status(201).send(created_vocab)
 }

@@ -15,19 +15,19 @@ const userSchema = mongoose.Schema({
 userSchema.statics.signup = async function(email, password) {
 
   if (!email || !password) {
-    throw Error('All fields must be filled')
+    throw Error('All fields must be filled.')
   }
   if (!validator.isEmail(email)) {
-    throw Error('Email not valid')
+    throw Error('Email not valid.')
   }
-  if (!validator.isStrongPassword(password,{minLength:3})) {
-    throw Error('Password not strong enough')
+  if (!validator.isStrongPassword(password,{ minLength: 3, minLowercase: 0, minUppercase: 0, minNumbers: 0, minSymbols: 0, returnScore: false, pointsPerUnique: 1, pointsPerRepeat: 0.5, pointsForContainingLower: 10, pointsForContainingUpper: 10, pointsForContainingNumber: 10, pointsForContainingSymbol: 10 })) {
+    throw Error('Password not strong enough.')
   }
 
   const exists = await this.findOne({ email })
 
   if (exists) {
-    throw Error('Email already in use')
+    throw Error('Email already in use.')
   }
 
   const salt = await bcrypt.genSalt(10)
@@ -41,17 +41,17 @@ userSchema.statics.signup = async function(email, password) {
 userSchema.statics.login = async function(email, password) {
 
   if (!email || !password) {
-    throw Error('All fields must be filled')
+    throw Error('All fields must be filled.')
   }
 
   const user = await this.findOne({ email })
   if (!user) {
-    throw Error('Incorrect email')
+    throw Error('Email does not exist.')
   }
 
   const match = await bcrypt.compare(password, user.password)
   if (!match) {
-    throw Error('Incorrect password')
+    throw Error('Incorrect password.')
   }
 
   return user

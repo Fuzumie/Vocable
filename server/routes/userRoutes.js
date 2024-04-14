@@ -1,17 +1,13 @@
 const express = require("express");
-
-// controller functions
+const requireAuth = require( '../middleware/requireAuth');
 const { loginUser, signupUser, getUser, updateUser } = require("../controllers/userController");
-
 const router = express.Router();
 
-// login route
+
+
 router.post("/login", loginUser);
-
-// signup route
 router.post("/signup", signupUser);
-
-router.get("/:id", getUser);
-router.put("/:id", updateUser)
+router.get("/:id",requireAuth, getUser);
+router.put("/:id",requireAuth, updateUser)
 
 module.exports = router;

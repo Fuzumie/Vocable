@@ -37,6 +37,11 @@ const getUser = async (req, res) => {
   try {
       const user = await User.findById(req.params.id);
       res.status(200).send(user);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
   } catch (error) {
       console.error(error);
       res.status(500).send({ message: "Internal Server Error" });
@@ -52,8 +57,8 @@ const updateUser = async (req, res) => {
       if (!userInfo) {
           return res.status(404).json({ message: "User not found" });
       }
-
-      const updatedUserInfo = await User.findByIdAndUpdate(id, { 
+    
+     const updatedUserInfo = await User.findByIdAndUpdate(id, { 
         games: req.body.games,
         wins: req.body.wins,
         loses: req.body.loses 
