@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 function Signup() {
     
-    const history=useNavigate()
+  const history=useNavigate()
   const [email, setEmail]=useState('')
   const [password,setPassword]=useState('')
 
@@ -14,7 +14,7 @@ function Signup() {
 
     try{
 
-      await axios.post('http://localhost:8000/signup',{
+      await axios.post('http://localhost:8000/api/user/signup',{
         email,password
       })
       .then(res=>{
