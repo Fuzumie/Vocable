@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const Word =  require('./models/wordModel');
 const userRoutes = require('./routes/userRoutes');
 const vocabRoutes = require('./routes/vocabRoutes');
-const worddRoutes = require('./routes/wordRoutes');
+const wordRoutes = require('./routes/wordRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 app.use('/api/user', userRoutes);
 app.use('/api/vocab', vocabRoutes);
-app.use('/api/words', worddRoutes);
+app.use('/api/getwords', wordRoutes);
 
  
 

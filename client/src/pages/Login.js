@@ -1,74 +1,43 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react"
+import { useLogin } from "../hooks/useLogin"
+import { Link } from "react-router-dom";
+const Login = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const {login, error, isLoading} = useLogin()
 
-function Login() {
-  
-  const history=useNavigate()
-  
-  const [email, setEmail]=useState('')
-  const [password,setPassword]=useState('')
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-
-  async function submit(e){
-    e.preventDefault();
-
-    try{
-
-      await axios.post('http://localhost:8000/api/user/login',{
-        email,password
-      })
-      .then(res=>{
-        if(res.data=="exist"){
-          history("/home")
-        }
-        else if(res.data=="not"){
-          alert("User does not exist")
-        }
-      })
-      .catch(e=>{
-        alert("wrong dedtails")
-        console.loge(e)
-      })
-
-    }
-    catch(e){
-        console.log(e)
-    }
-
+    await login(email, password)
   }
   
   
-  
   return (
-    <div className="login">
-      <h1>Login</h1>
+    <form className="login" onSubmit={handleSubmit}>
+    <h3>Log In</h3>
+    
+    <label>Email address:</label>
+    <input 
+      type="email" 
+      onChange={(e) => setEmail(e.target.value)} 
+      value={email} 
+    />
+    <label>Password:</label>
+    <input 
+      type="password" 
+      onChange={(e) => setPassword(e.target.value)} 
+      value={password} 
+    />
 
-      <form action="POST">
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          name=""
-          id=""
-        ></input>
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          name=""
-          id=""
-        ></input>
-        <input type="submit" onClick={submit}/>
-      </form>
+    <button disabled={isLoading}>Log in</button>
+    {error && <div className="error">{error}</div>}
 
-      <br />
-      <p>OR</p>
-      <br />
+    <Link to="/signup">Signup</Link>
+  </form>
+)
 
-      <Link to="/signup">Signup</Link>
-    </div>
-  );
+
 }
 
 export default Login;

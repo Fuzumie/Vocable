@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import useWordle from './useWordle'
-import './Medium.css'
+import useWordle from '../../../hooks/useWordle'
+
 // components
 import Grid from './Grid'
 import Keypad from './Keypad'
-import GameOver from './GameOver'
+import Modal from './Modal'
 
 export default function Wordle({ solution }) {
   const { currentGuess, guesses, turn, isCorrect, usedKeys, handleKeyup } = useWordle(solution)
@@ -29,7 +29,7 @@ export default function Wordle({ solution }) {
     <div>
       <Grid guesses={guesses} currentGuess={currentGuess} turn={turn} />
       <Keypad usedKeys={usedKeys} />
-      {showModal && <GameOver isCorrect={isCorrect} turn={turn} solution={solution} />}
+      {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution} />}
     </div>
   )
 }
