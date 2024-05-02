@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 
-function Modal({closeModal}) {
+function CreateVocabModal({closeModal}) {
 
   return (
     <div className="modalBackground">
@@ -13,16 +13,11 @@ function Modal({closeModal}) {
             onClick={() => {closeModal(false);}}>X</button>
         </div>
         <div className="title">
-            <h1>Please select a difficulty</h1>
+            <h1>Please name your vocabulary</h1>
         </div>
         <div className="body">
         
-        <Link to="/easy">
-            <button>Easy</button>
-            </Link>
-        <Link to="/medium">
-          <button>Medium</button>
-        </Link>    
+        
         </div>
         <div className="footer">
         
@@ -33,4 +28,4 @@ function Modal({closeModal}) {
 }
   
 
-export default Modal
+export default CreateVocabModal

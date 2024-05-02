@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './Medium.css'
+import './Wordle.css'
 
 export default function Keypad({ usedKeys }) {
     const [letters, setLetters] = useState([]);

@@ -35,13 +35,15 @@ const signupUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-      const user = await User.findById(req.params.id);
-      res.status(200).send(user);
+    const id = req.user._id;
+    const user = await User.findById(id);
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    res.status(200).send(user);
 
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-      
   } catch (error) {
       console.error(error);
       res.status(500).send({ message: "Internal Server Error" });
@@ -49,7 +51,7 @@ const getUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const id = req.params.id;
+  const id = req.user._id;
 
   try {
       const userInfo = await User.findById(id);
@@ -59,9 +61,9 @@ const updateUser = async (req, res) => {
       }
     
      const updatedUserInfo = await User.findByIdAndUpdate(id, { 
-        games: req.body.games,
-        wins: req.body.wins,
-        loses: req.body.loses 
+        games: req.body.games || userInfo.games,
+        wins: req.body.wins || userInfo.wins,
+        loses: req.body.loses || userInfo.loses
       }, { new: true });
       res.status(200).json(updatedUserInfo);
   } catch (error) {

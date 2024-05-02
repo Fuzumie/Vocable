@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const useWordle = (solution) => {
   const [turn, setTurn] = useState(0) 
@@ -39,9 +40,11 @@ const useWordle = (solution) => {
   // update the isCorrect state if the guess is correct
   // add one to the turn state
   const addNewGuess = (formattedGuess) => {
+
     if (currentGuess === solution) {
       setIsCorrect(true)
     }
+
     setGuesses(prevGuesses => {
       let newGuesses = [...prevGuesses]
       newGuesses[turn] = formattedGuess
@@ -109,6 +112,7 @@ const useWordle = (solution) => {
     }
   }
 
+  
   return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup}
 }
 

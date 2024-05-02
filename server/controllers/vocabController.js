@@ -17,16 +17,16 @@ const createVocab = async (req, res)=>{
 }
 
 const getVocab = async (req, res)=>{
-    const user = req.user
-    const vocabs = await Vocabulary.find({owner:user._id})
+    const user = req.user._id
+    const vocabs = await Vocabulary.find({owner:user})
     res.status(200).send(vocabs)
 }
 
 const deleteVocab = async (req, res)=>{
-    const user = req.user
+    const user = req.user._id
     const vocab = await Vocabulary.findById(req.params.id)
 
-    if (vocab.owner.toString() !==user._id.toString()) {
+    if (vocab.owner.toString() !==user.toString()) {
         res.status(401)
         throw new Error("Unauthorized access")
     }
@@ -35,12 +35,12 @@ const deleteVocab = async (req, res)=>{
 }
 
 const updateVocab = async (req, res)=>{
-    const user = req.user
+    const user = req.user._id
     const id = req.params.id
 
     const vocab = await Vocabulary.findById(id)
     
-    if (vocab.owner.toString() !==user._id.toString()) {
+    if (vocab.owner.toString() !==user.toString()) {
         res.status(401)
         throw new Error("Unauthorized access")
     }
@@ -50,12 +50,12 @@ const updateVocab = async (req, res)=>{
 }
 
 const addWord = async (req, res) => {
-    const user = req.user
+    const user = req.user._id
     const vocab_id = req.params.id
     
     try {
         const { word, definition } = req.body;
-        const vocab = await Vocabulary.findOne({ _id:vocab_id, owner: user._id });
+        const vocab = await Vocabulary.findOne({ _id:vocab_id, owner: user });
 
         if (!vocab) {
             return res.status(404).json({ message: "Vocabulary not found" });

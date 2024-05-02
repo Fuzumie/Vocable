@@ -1,9 +1,9 @@
 import { useAuthContext } from './useAuthContext'
-import { useVocabContext } from './useVocabContext'
+import { useVocabsContext } from './useVocabsContext'
 
 export const useLogout = () => {
   const { dispatch } = useAuthContext()
-  const { dispatch: dispatchVocabs } = useVocabContext()
+  const { dispatch: dispatchVocabs } = useVocabsContext()
 
   const logout = () => {
     // remove user from storage

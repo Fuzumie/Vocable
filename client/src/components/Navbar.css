@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #000000; /* Navbar background color */
+    color: white; /* Text color */
+  }
+  
+  .navbar-title {
+    margin: 0; /* Remove default margin */
+    font-size: 1.5rem; /* Adjust font size as needed */
+    color: white; /* Text color */
+  }
+  
+  .navbar-links {
+    list-style-type: none; /* Remove default list styles */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    color: white; /* Text color */
+  }
+  
+  .navbar-links li {
+    display: inline-block; /* Display list items horizontally */
+    margin-left: 20px; /* Adjust spacing between items as needed */
+  }
+  
+  .navbar-links li a {
+    color: white; /* Text color for links */
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .navbar-links li a:hover {
+    text-decoration: underline; /* Underline links on hover */
+  }

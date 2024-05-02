@@ -1,5 +1,6 @@
 import React from 'react'
-import './Medium.css'
+import './Wordle.css'
+
 
 export default function Row({ guess, currentGuess }) {
 

@@ -8,7 +8,7 @@ router.use(requireAuth);
 
 router.get('/', getVocab);
 router.post('/', createVocab);
-router.get('/:id', getVocab);
+router.get('/', getVocab);
 router.delete('/:id', deleteVocab);
 router.put('/:id', updateVocab);
 router.post("/addword/:id", addWord);
