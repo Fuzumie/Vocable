@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const Word =  require('./models/wordModel');
 const userRoutes = require('./routes/userRoutes');
 const vocabRoutes = require('./routes/vocabRoutes');
 const wordRoutes = require('./routes/wordRoutes');

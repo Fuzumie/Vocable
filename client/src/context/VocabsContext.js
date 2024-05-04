@@ -14,8 +14,29 @@ export const vocabsReducer = (state, action) => {
       }
     case 'DELETE_VOCAB':
       return {
-        vocabs: state.vocabs.filter((w) => w._id !== action.payload._id)
+        vocabs: state.vocabs.filter(vocab => vocab._id !== action.payload)
       }
+      case 'RENAME_VOCAB':
+        return {
+          vocabs: state.vocabs.map(vocab => {
+            if (vocab._id === action.payload.id) {
+              return { ...vocab, name: action.payload.newName };
+            }
+            return vocab;
+          })
+        }
+      case 'DELETE_WORD':
+        return {
+          vocabs: state.vocabs.map(vocab => {
+            if (vocab._id === action.payload.vocabId) {
+              return { 
+                ...vocab, 
+                words: vocab.words.filter(word => word._id !== action.payload.wordId)
+              };
+            }
+            return vocab;
+          })
+        }
     default:
       return state
   }

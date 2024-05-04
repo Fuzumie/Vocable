@@ -1,13 +1,10 @@
-import Wordle from '../components/wordle/medium/Wordle';
-import { useEffect, useState } from 'react'
-
-
-
+import React, { useState, useEffect } from 'react';
+import Wordle from '../components/wordle/Wordle';
 
 function GamePage() {
- 
-  const [solution, setSolution] = useState(null)
-  
+  const [solution, setSolution] = useState(null);
+  const [definition, setDefinition] = useState(null);
+
   useEffect(() => {
     const fetchAndSelectRandomWord = async () => {
       try {
@@ -18,7 +15,9 @@ function GamePage() {
         const data = await response.json();
         if (data.length > 0) {
           const randomIndex = Math.floor(Math.random() * data.length);
-          setSolution(data[randomIndex].word);
+          const selectedWord = data[randomIndex];
+          setSolution(selectedWord.word);
+          setDefinition(selectedWord.definition);
         }
       } catch (error) {
         console.error('Error fetching words:', error);
@@ -27,15 +26,15 @@ function GamePage() {
 
     fetchAndSelectRandomWord();
   }, []);
+
   return (
     <div className="App">
-      <h1>Wordle (Lingo)</h1>
       <p>{solution}</p>
-      {solution && <Wordle solution={solution} />}
+      {solution && <Wordle solution={solution} definition={definition} />}
     </div>
-  )
+  );
 }
 
+export default GamePage;
 
 
-export default GamePage

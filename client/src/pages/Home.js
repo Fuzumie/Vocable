@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import Modal from '../components/Modal';
-import { Link, useSearchParams } from 'react-router-dom';
+import React from 'react'
+
+import { Link } from 'react-router-dom';
 
 
-function Home({selectedMode}) {
-  const [OpenModal, setOpenModal] = useState(false);
+function Home() {
+
   
   
   return (
     <div className="home">
       <div className="headerContainer">
       
-      </div><div className='body'>
-      
-      <button className='selector' onClick={()=>{setOpenModal(true)}}>Play</button>
-      {OpenModal && <Modal closeModal={setOpenModal}/>}
-      
+      </div>
+      <div className='body'>
+      <p>This word game challenges your vocabulary skills!</p>
+      <p>Guess the hidden word with limited attempts.</p>
+      <p>Are you ready to test your word prowess?</p>
+      <Link to="/wordle">
+          <button>Play</button>
+        </Link>  
       </div>
     </div>
   )

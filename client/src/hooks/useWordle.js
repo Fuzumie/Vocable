@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAuthContext } from '../hooks/useAuthContext'
+import axios from 'axios';
 
 const useWordle = (solution) => {
   const [turn, setTurn] = useState(0) 
@@ -81,7 +81,7 @@ const useWordle = (solution) => {
 
   // handle keyup event & track current guess
   // if user presses enter, add the new guess
-  const handleKeyup = ({ key }) => {
+  const handleKeyup = async ({ key }) => {
     if (key === 'Enter') {
       // only add guess if turn is less than 5
       if (turn > 5) {
@@ -90,16 +90,29 @@ const useWordle = (solution) => {
       }
       // do not allow duplicate words
       if (history.includes(currentGuess)) {
-        console.log('you already tried that word.')
+        alert('you already tried that word.')
         return
       }
       // check word is 5 chars
       if (currentGuess.length !== 5) {
-        console.log('word must be 5 chars.')
+        alert('word must be 5 chars.')
         return
       }
-      const formatted = formatGuess()
-      addNewGuess(formatted)
+      try {
+        const response = await axios.get(`/api/getwords/check?word=${currentGuess}`);
+        if (response.data.exists) {
+          // Word exists in the database
+          // Proceed with adding the guess
+          const formatted = formatGuess();
+          addNewGuess(formatted);
+        } else {
+          // Word does not exist in the database
+          alert('The guessed word is not in the database.');
+        }
+      } catch (error) {
+        console.error('Error checking word:', error);
+      }
+
     }
     if (key === 'Backspace') {
       setCurrentGuess(prev => prev.slice(0, -1))

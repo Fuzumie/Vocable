@@ -20,7 +20,7 @@ function Modal({closeModal}) {
         <Link to="/easy">
             <button>Easy</button>
             </Link>
-        <Link to="/medium">
+        <Link to="/wordle">
           <button>Medium</button>
         </Link>    
         </div>

@@ -1,40 +1,47 @@
-import { Link } from 'react-router-dom'
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
+import LoginModal from "./LoginModal"; // Import the LoginModal component
 import './Navbar.css'
-
+import './LoginModal.css'
 const Navbar = () => {
+  const [showModal, setShowModal] = useState(false); // State to manage modal visibility
   const { logout } = useLogout()
   const { user } = useAuthContext()
 
-  const handleClick = () => {
-    logout()
+  const handleClick = ()=>{
+    logout();
   }
 
   return (
-    <header>
-      <div className="navbar">
+    <header className="navbar">
+      <div className="navbar-items">
         <Link to="/">
-          <h1 className='navbar-title'>Vocable</h1>
+          <h1 className="navbar-title">Vocable</h1>
         </Link>
         <nav>
-          {user && (
-            <div>
-              <Link to="/dashboard">Dashboard</Link>
-              <span>{user.email}</span>
-              <button onClick={handleClick}>Log out</button>
-            </div>
-          )}
-          {!user && (
+        {user && (
+          <div className="navbar-links">
+            <Link to="/wordle">Play</Link>
+            <Link to="/dashboard">Dashboard</Link>
+            <button className='navbar-button' onClick={handleClick}>Log out</button>
+          </div>
+           )}
+            {!user && (
             <div className='navbar-links'>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Signup</Link>
+              <Link to="/wordle">Play</Link>
+              <button className='navbar-button' onClick={() => setShowModal(true)}>Sign in</button> {/* Open the modal */}
             </div>
           )}
         </nav>
       </div>
+      <div className ={ `modal-login-state ${showModal? 'active' : 'inactive'}` }>
+        <LoginModal onClose={() => setShowModal(false)} />
+      </div>
+  
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

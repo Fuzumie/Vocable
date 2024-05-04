@@ -30,7 +30,13 @@ const deleteVocab = async (req, res)=>{
         res.status(401)
         throw new Error("Unauthorized access")
     }
-    await Vocabulary.findByIdAndRemove(req.params.id)
+    await Vocabulary.findByIdAndDelete(req.params.id)
+    
+    await User.updateMany(
+        { vocabularies: req.params.id },
+        { $pull: { vocabularies: req.params.id } }
+      );
+
     res.status(204).end
 }
 
@@ -50,19 +56,20 @@ const updateVocab = async (req, res)=>{
 }
 
 const addWord = async (req, res) => {
-    const user = req.user._id
-    const vocab_id = req.params.id
+    const user = req.user._id;
+    const vocabId = req.params.id;
     
     try {
         const { word, definition } = req.body;
-        const vocab = await Vocabulary.findOne({ _id:vocab_id, owner: user });
+        const vocab = await Vocabulary.findOneAndUpdate(
+            { _id: vocabId, owner: user },
+            { $push: { words: { word, definition } } },
+            { new: true }
+        );
 
         if (!vocab) {
             return res.status(404).json({ message: "Vocabulary not found" });
         }
-
-        vocab.words.push({ word, definition });
-        await vocab.save();
 
         res.status(200).json({ message: "Word added successfully", vocabulary: vocab });
     } catch (error) {

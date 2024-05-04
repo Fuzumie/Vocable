@@ -1,35 +1,84 @@
+body {
+  text-align: center;
+  font-size: 1em;
+  font-family: verdana;
+  margin: 0;
+}
+h1 {
+  font-size: 1.2em;
+  padding: 20px 0;
+  margin: 0 0 30px 0;
+  
+}
+/* rows */
+header > button {
+  text-decoration: none;
+  margin-right: 450px;
+}
+
+header a {
+  color: #ffffff;
+  text-decoration: none;
+
+  margin-right: 50px;
+}
+
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px; /* Adjust padding as needed */
-    background-color: #000000; /* Navbar background color */
-    color: white; /* Text color */
-  }
   
-  .navbar-title {
-    margin: 0; /* Remove default margin */
-    font-size: 1.5rem; /* Adjust font size as needed */
-    color: white; /* Text color */
-  }
+  color: white; 
+  padding: 10px 20px; 
   
-  .navbar-links {
-    list-style-type: none; /* Remove default list styles */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    color: white; /* Text color */
-  }
-  
-  .navbar-links li {
-    display: inline-block; /* Display list items horizontally */
-    margin-left: 20px; /* Adjust spacing between items as needed */
-  }
-  
-  .navbar-links li a {
-    color: white; /* Text color for links */
-    text-decoration: none; /* Remove underline from links */
-  }
-  
-  .navbar-links li a:hover {
-    text-decoration: underline; /* Underline links on hover */
-  }
+}
+.navbar-button {
+  margin-right: 350px;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border:none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease
+}
+
+.navbar-button:hover {
+  color: white;
+  background-color:  #25272a;
+  border-color: #ffffff;
+}
+
+.navbar-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border:white;
+}
+
+.navbar-title {
+  margin: 0; /* Remove default margin */
+  font-size: 1.5rem; /* Adjust font size as needed */
+  color: white;
+  margin-left: 350px;
+}
+
+.navbar-links {
+  list-style-type: none; /* Remove default list styles */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  margin-left: 20px;
+  color: #ffffff;
+  text-decoration: none
+}
+
+.navbar-links li {
+  display: inline-block; /* Display list items horizontally */
+  margin-left: 20px; /* Adjust spacing between items as needed */
+}
+
+.navbar-links li a {
+  color: white; /* Text color for links */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.navbar-links li a:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
