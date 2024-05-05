@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
-import LoginModal from "./LoginModal"; // Import the LoginModal component
+import LoginModal from "./LoginModal";
 import './Navbar.css'
 import './LoginModal.css'
 const Navbar = () => {
-  const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+  const [showModal, setShowModal] = useState(false); 
   const { logout } = useLogout()
   const { user } = useAuthContext()
 

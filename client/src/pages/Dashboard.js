@@ -11,6 +11,7 @@ const Dashboard = () => {
   const token = user.token;
   const [newVocabularyName, setNewVocabularyName] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -57,9 +58,9 @@ const Dashboard = () => {
     }
     return null; // Return null if user has not played a single game
   };
-  
+  const filteredResults = vocabs && vocabs.filter(vocab => vocab.name.toLowerCase().includes(searchQuery.toLowerCase()));
   return (
-    <div>
+    <div className='dashboard'>
       <h1 className='stats-h1'>Dashboard</h1>
       {userInfo && (
         <div className='stats'>
@@ -71,13 +72,25 @@ const Dashboard = () => {
       )}
       </div>
       )}
-      <div className='vocab'>
-          {vocabs &&
-            vocabs.map((vocabulary) => (
-              <VocabDetails key={vocabulary._id} vocabulary={vocabulary} />
-            ))}
-        
+      <div>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search vocabularies..."
+        />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      
       <button className='create-vocab-button' onClick={() => setShowModal(true)}>Create Vocabulary</button>
+      
+      <div className='vocab'>
+       <div className='vocab-body'>  
+      {filteredResults && filteredResults.map((result) => (
+          <VocabDetails key={result._id} vocabulary={result} />
+        ))}
+      </div> 
+      
       {showModal && (
         <div className="modal-dashboard">
           <div className="modal-dashboard-content">

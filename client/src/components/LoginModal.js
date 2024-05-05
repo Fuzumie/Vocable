@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useLogin } from "../hooks/useLogin";
-import { Link } from "react-router-dom";
 import Signup from "./Signup"; // Import the Signup component
 import "./LoginModal.css";
 

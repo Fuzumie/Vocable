@@ -22,6 +22,57 @@ const getVocab = async (req, res)=>{
     res.status(200).send(vocabs)
 }
 
+const searchUserVocab = async (req, res) => {
+    const user = req.user._id;
+    const vocabName = req.query.name;
+
+    try {
+        let query = { owner: user };
+        if (vocabName) {
+            query.name = { $regex: new RegExp(vocabName, "i") }; // Case-insensitive search
+        }
+
+        const vocabs = await Vocabulary.find(query);
+        res.status(200).send(vocabs);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+const searchWord = async (req, res) => {
+    const user = req.user._id;
+    const { query } = req.query;
+
+    try {
+        // Search for vocabularies
+        const vocabularies = await Vocabulary.find({ owner: user, name: { $regex: new RegExp(query, "i") } });
+        
+        // Search for words
+        const words = await Vocabulary.aggregate([
+            { $match: { owner: user } },
+            { $unwind: "$words" },
+            {
+                $match: {
+                    "words.word": { $regex: new RegExp(query, "i") }
+                }
+            },
+            {
+                $group: {
+                    _id: "$_id",
+                    name: { $first: "$name" },
+                    words: { $push: "$words" }
+                }
+            }
+        ]);
+
+        res.status(200).json({ vocabularies, words });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
 const deleteVocab = async (req, res)=>{
     const user = req.user._id
     const vocab = await Vocabulary.findById(req.params.id)
@@ -109,5 +160,7 @@ module.exports = {
     updateVocab,
     deleteVocab,
     addWord,
-    deleteWord
+    deleteWord,
+    searchUserVocab,
+    searchWord
 }
