@@ -67,9 +67,8 @@ body {
 .vocab-details {
   border-radius: 1px;
   overflow-y: auto;
-  
-
   transform: translatey(66px);
+  
 }
 .vocab-details h4 {
   margin: 0 0 10px 0;
@@ -133,13 +132,11 @@ body {
 }
 
 .word-list {
-  display:block;
-  max-height: 0x;
   min-width:100px;
   overflow-y: auto;
   width: 60%;
   padding: 30px 10px 20px;
-  margin-left: 37.3%;
+  margin-left: auto;
   margin-top: -20px;
   border-radius: 10px;
   background-color: #1b1e20;
