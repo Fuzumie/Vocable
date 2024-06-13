@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useVocabsContext } from "../hooks/useVocabsContext";
@@ -14,6 +14,7 @@ const Dashboard = () => {
   const [newVocabularyName, setNewVocabularyName] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const modalRef = useRef(null);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -66,11 +67,31 @@ const Dashboard = () => {
     }
     return null; // Return null if user has not played a single game
   };
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      setShowModal(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showModal]);
+
   const filteredResults =
     vocabs &&
     vocabs.filter((vocab) =>
       vocab.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
   return (
     <div className="dashboard">
       <h1 className="stats-h1">Dashboard</h1>
@@ -84,14 +105,15 @@ const Dashboard = () => {
           )}
         </div>
       )}
-      <div>
+      <div className="search-container">
         <input
+          className="search"
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search vocabularies..."
         />
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i className="fa-solid fa-magnifying-glass"></i>
       </div>
 
       <button
@@ -111,12 +133,9 @@ const Dashboard = () => {
 
         {showModal && (
           <div className="modal-dashboard">
-            <div className="modal-dashboard-content">
-              <span className="close" onClick={() => setShowModal(false)}>
-                &times;
-              </span>
+            <div ref={modalRef} className="modal-dashboard-content">
               <h2>Create Vocabulary</h2>
-              <input
+              <input className="modal-input"
                 type="text"
                 value={newVocabularyName}
                 onChange={(e) => setNewVocabularyName(e.target.value)}

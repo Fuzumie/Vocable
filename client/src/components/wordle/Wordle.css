@@ -1,9 +1,26 @@
+/* Keyframe animation for fading in modals */
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
+/* General styles */
+body {
+  text-align: center;
+  font-size: 1em;
+  font-family: verdana;
+  margin: 0;
+}
+
+/* Wordle container animation */
 .wordle-container {
   opacity: 0; 
   animation: fadeIn 1s ease forwards; 
 }
-
 
 @keyframes fadeIn {
   from {
@@ -14,13 +31,7 @@
   }
 }
 
-body {
-  text-align: center;
-  font-size: 1em;
-  font-family: verdana;
-  margin: 0;
-}
-
+/* Row and cell styles */
 .row {
   text-align: center;
   display: flex;
@@ -32,6 +43,7 @@ body {
   width: 60px;
   height: 60px;
   border: 1px solid #bbb;
+  border-radius: 10px;
   margin: 4px;
   text-align: center;
   line-height: 60px;
@@ -45,8 +57,8 @@ body {
   animation: flip 0.5s ease forwards;
 }
 .row > div.grey {
-  --background: #a1a1a1;
-  --border-color: #a1a1a1;
+  --background: #6b6c6c;
+  --border-color: #6b6c6c;
   animation: flip 0.6s ease forwards;
 }
 .row > div.yellow {
@@ -69,11 +81,12 @@ body {
 .row.current > div.filled {
   animation: bounce 0.2s ease-in-out forwards;
 }
+
+/* Keypad styles */
 .keypad {
   max-width: 1000px;
   margin: 50px auto;
 }
-
 .keypad > div.green {
   background: #5ac85a;
   color: #fff;
@@ -85,16 +98,17 @@ body {
   transition: all 0.3s ease-in;
 }
 .keypad > div.grey {
-  background: #a1a1a1;
+  background: #6b6c6c;
   color: #fff;
   transition: all 0.3s ease-in;
 }
+
+/* Keypad row styles */
 .row_key {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
 }
-
 .row_key > div {
   width: 55px;
   height: 65px;
@@ -110,105 +124,109 @@ body {
   background: #5ac85a;
   color: #fff;
   transition: all 0.3s ease-in;
-
 }
-
 .row_key > div.grey {
-  background: #a1a1a1;
+  background: #6b6c6c;
   color: #fff;
   transition: all 0.3s ease-in;
 }
-
 .row_key > div.yellow {
   background: #e2cc68;
   color: #fff;
   transition: all 0.3s ease-in;
 }
+
+/* Modal styles */
 .modal {
-  background: rgba(103, 103, 103, 0.7);
+  background: rgba(0, 0, 0, 0.7);
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
-  left:0;
+  left: 0;
+  animation: fadeInModal 0.5s ease forwards; 
 }
-.close {
-  position: absolute;
-  top: -40px; 
-  right: -15px; 
-  cursor: pointer;
-  width: 20px; 
-  height: 20px; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10%;
-  font-size: 25px; 
-}
-.close-main {
-  position: relative;
-  top: -415px; /* Adjust the top position as needed */
-  left: 675px; /* Adjust the right position as needed */
-  cursor: pointer;
-  width: 20px; /* Adjust the width as needed */
-  height: 20px; /* Adjust the height as needed */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10%;
-  font-size: 25px; /* Adjust the font size as needed */
-}
-.close-main:hover {
-  background-color: #ccc; /* Change background color on hover */
-}
-.close:hover {
-  background-color: #ccc; /* Change background color on hover */
-}
-
 .modal-content {
-  position: relative; /* Ensure relative positioning for absolute positioning to work */
+  position: relative;
 }
 .modal > div {
   max-width: 480px;
-  background: #ffffff;
+  background: #25272a;
   padding: 40px;
+  color: white;
   border-radius: 10px;
   margin: 10% auto;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-}
-.modal button {
-  color: rgb(0, 0, 0);
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
 .modal-create_vocab {
   max-width: 480px;
-  background: #fff;
-  padding: 40px;
+  background: #25272a;
   border-radius: 10px;
-  margin: 10% auto;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  margin-top: 10%;
+  animation: fadeInModal 0.5s ease forwards;
+}
+.new-vocab-input{
+  color:#ffffff;
+  border-width:0px;
+  background-color:#1b1e20;
+  border-radius: 10px;
+  height:40px;
+  font-family:Verdana,Geneva,sans-serif;
+  font-size:15px;
+  text-align:center;
+  position:relative;
+}
+.play_again {
+  color: rgb(0, 0, 0);
+  border: none;
+  margin-top: 20px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
+  font-size: 1em;
+}
+.play_again:hover {
+  color: white;
+  background-color: #25272a;
+  border-color: #ffffff;
+}
+.modal .vocab-button {
+  color: rgb(255, 255, 255);
+  background-color: #25272a;
+  margin-top: 20px;
+  border-color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1px solid;
+  transition: border-color 0.3s ease;
+  font-size: 1em;
+}
+.modal .vocab-button:hover {
+  color: #25272a;
+  background-color: #ffffff;
+  border-color: #ffffff;
 }
 .modal .solution {
   color: #ff004c;
   font-weight: bold;
-  font-size: 0.8em;
+  font-size: 2em;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-/* keyframe animations */
+/* Keyframe animations */
 @keyframes flip {
   0% {
     transform: rotateX(0);
-    background: #fff;
+    background: #25272a;
     border-color: #333;
   }
   45% {
     transform: rotateX(90deg);
-    background: white;
+    background: #25272a;
     border-color: #333;
   }
   55% {
@@ -227,13 +245,13 @@ body {
 @keyframes bounce {
   0% { 
     transform: scale(1);
-    border-color: #ddd;
+    border-color: #353535;
   }
   50% { 
     transform: scale(1.2);
   }
   100% {
     transform: scale(1);
-    border-color: #333;
+    border-color: #ffffff;
   }
 }

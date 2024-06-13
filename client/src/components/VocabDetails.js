@@ -125,7 +125,7 @@ const VocabDetails = ({ vocabulary }) => {
           {vocabulary.words.map((word) => (
             <li key={word._id}>
               <strong>{word.word}:</strong> {word.definition}
-              <button onClick={() => handleDeleteWord(word._id)}>Delete</button>
+              <span className="word-delete"onClick={() => handleDeleteWord(word._id)}><i class="fas fa-trash-alt"></i></span>
             </li>
           ))}
         </ul>
