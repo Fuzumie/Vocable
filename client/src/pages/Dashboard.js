@@ -106,22 +106,21 @@ const Dashboard = () => {
         </div>
       )}
       <div className="search-container">
-        <input
-          className="search"
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search vocabularies..."
-        />
-        <i className="fa-solid fa-magnifying-glass"></i>
-      </div>
-
+      <input
+        className="search"
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search vocabularies..."
+      />
+      <i className="fa-solid fa-magnifying-glass"></i>
       <button
         className="create-vocab-button"
         onClick={() => setShowModal(true)}
       >
         Create Vocabulary
       </button>
+    </div>
 
       <div className="vocab">
         <div className="vocab-body">

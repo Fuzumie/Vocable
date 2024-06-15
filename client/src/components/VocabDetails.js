@@ -14,11 +14,10 @@ export const handleCreateVocabulary = async (newVocabularyName, token, dispatch,
       },
     });
 
-    if (response.status === 201) {
       dispatch({ type: 'CREATE_VOCAB', payload: response.data });
       setShowModal(false);
       setNewVocabularyName('');
-    }
+    
   } catch (error) {
     console.error('Error creating vocabulary:', error);
   }
@@ -35,8 +34,6 @@ const VocabDetails = ({ vocabulary }) => {
   
   const handleDelete = async () => {
     
-    dispatch({ type: 'DELETE_VOCAB', payload: vocabulary._id });
-    
     try {
       await axios.delete(`/api/vocab/${vocabulary._id}`, {
         headers: {
@@ -47,9 +44,13 @@ const VocabDetails = ({ vocabulary }) => {
     } catch (error) {
       console.error('Error deleting vocabulary:', error);
     }
+
+    dispatch({ type: 'DELETE_VOCAB', payload: vocabulary._id });
+
   };
 
   const handleRename = async () => {
+    
     try {
       const response = await axios.put(`/api/vocab/${vocabulary._id}`, {
         name: newName,
@@ -58,31 +59,29 @@ const VocabDetails = ({ vocabulary }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      
-      if (response.status === 201) {
-        dispatch({ type: 'RENAME_VOCAB', payload: { id: vocabulary._id, newName: newName } });
-      }
 
       console.log(response.data)
     } catch (error) {
       console.error('Error renaming vocabulary:', error);
     }
+    setEditing(false);
+    dispatch({ type: 'RENAME_VOCAB', payload: { id: vocabulary._id, newName: newName } });
   };
 
   const handleDeleteWord = async (wordId) => {
     
-    dispatch({ type: 'DELETE_WORD', payload: { vocabId: vocabulary._id, wordId: wordId } });
-    
     try {
       await axios.delete(`/api/vocab/deleteword/${vocabulary._id}/word/${wordId}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Assuming you're using localStorage to store the token
+          Authorization: `Bearer ${token}`,
         },
       });
-      // If needed, update the state to remove the deleted word
+    
     } catch (error) {
       console.error('Error deleting word:', error);
     }
+
+    dispatch({ type: 'DELETE_WORD', payload: { vocabId: vocabulary._id, wordId: wordId } });
   };
 
   return (
@@ -90,10 +89,10 @@ const VocabDetails = ({ vocabulary }) => {
       <div className="vocab-header" onClick={() => setCollapsed(!collapsed)}>
         <h4>{vocabulary.name}</h4>
         
-        <div>
+        <div className='edit-vocab'>
           {editing ? (
             <>
-              <input
+              <input className='input-edit-vocab'
                 type="text"
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}

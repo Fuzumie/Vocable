@@ -19,7 +19,7 @@ body {
 /* Wordle container animation */
 .wordle-container {
   opacity: 0; 
-  animation: fadeIn 1s ease forwards; 
+  animation: fadeIn 0.3s ease forwards; 
 }
 
 @keyframes fadeIn {
