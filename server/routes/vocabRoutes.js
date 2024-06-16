@@ -9,7 +9,6 @@ router.use(requireAuth);
 router.get('/', getVocab);
 router.get('/getUserVocab', searchUserVocab);
 router.post('/', createVocab);
-router.get('/', getVocab);
 router.get('/searchWord', searchWord);
 router.delete('/:id', deleteVocab);
 router.put('/:id', updateVocab);

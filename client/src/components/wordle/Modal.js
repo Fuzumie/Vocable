@@ -70,6 +70,10 @@ export default function Modal({ isCorrect, solution, turn, definition, onCloseMo
     };
   });
 
+  const toggleModal = () => {
+    setShowModal(prev => !prev); // Toggle showModal state
+  };
+
   return (
     <div className="modal">
       <div ref={modalRef} className="modal-content">
@@ -98,20 +102,17 @@ export default function Modal({ isCorrect, solution, turn, definition, onCloseMo
                   <p>Please create a vocabulary.</p>
                 )}
                 <button className="vocab-button" onClick={handleAddToVocabulary}>Add to Vocabulary</button>
-                <button className="vocab-button" onClick={() => setShowModal(true)}>Create Vocabulary</button>
+                <button className="vocab-button" onClick={toggleModal}>Create Vocabulary</button>
                 {showModal && (
                   <div className="modal-create_vocab">
                     <div className="modal-content">
-                      
                       <input className="new-vocab-input"
                         type="text"
                         value={newVocabularyName}
                         onChange={(e) => setNewVocabularyName(e.target.value)}
                         placeholder="New Vocabulary Name"
                       />
-
                       <br></br>
-
                       <button className="vocab-button" onClick={createVocabulary}>Create</button>
                     </div>
                   </div>
@@ -146,12 +147,11 @@ export default function Modal({ isCorrect, solution, turn, definition, onCloseMo
                 ) : (
                   <p>Please create a vocabulary.</p>
                 )}
-                <button className="vocab-button" onClick={handleAddToVocabulary}>Add to Vocabulary</button>
-                <button className="vocab-button" onClick={() => setShowModal(true)}>Create Vocabulary</button>
+                <button className="vocab-button-add" onClick={handleAddToVocabulary}>Add to Vocabulary</button>
+                <button className="vocab-button" onClick={toggleModal}>Create Vocabulary</button>
                 {showModal && (
                   <div className="modal-create_vocab">
                     <div className="modal-content">
-                      
                       <input className="new-vocab"
                         type="text"
                         value={newVocabularyName}

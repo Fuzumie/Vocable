@@ -54,29 +54,29 @@ header a {
 }
 
 .navbar-title {
-  margin: 0; /* Remove default margin */
-  font-size: 1.5rem; /* Adjust font size as needed */
+  margin: 0; 
+  font-size: 1.5rem; 
   color: white;
   margin-left: 350px;
 }
 
 .navbar-links {
-  list-style-type: none; /* Remove default list styles */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
+  list-style-type: none; 
+  margin: 0; 
+  padding: 0; 
   margin-left: 20px;
   color: #ffffff;
   text-decoration: none
 }
 
 .navbar-links li {
-  display: inline-block; /* Display list items horizontally */
-  margin-left: 20px; /* Adjust spacing between items as needed */
+  display: inline-block; 
+  margin-left: 20px; 
 }
 
 .navbar-links li a {
-  color: white; /* Text color for links */
-  text-decoration: none; /* Remove underline from links */
+  color: white; 
+  text-decoration: none; 
 }
 
 .navbar-links li a:hover {

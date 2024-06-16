@@ -1,0 +1,36 @@
+
+  .home {
+    text-align: center;
+    color: white;
+    font-size: 1.5em;
+    margin-top: 5%;
+    animation: fadeIn 0.3s ease-in-out;
+    width: 1000px;
+    margin: auto;
+  }
+  
+  .home-body {
+    margin-top: 150px; /* Adjust spacing */
+    color: white;
+  }
+  
+
+  
+  .home-body button {
+    color: rgb(0, 0, 0);
+    border: none;
+    margin-top: 20px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+    font-size: 1em;
+  }
+  
+  .home-body button:hover {
+    color: white;
+    background-color: #25272a;
+    border-color: #ffffff;
+  }
+  

@@ -1,5 +1,6 @@
 body {
   background-color: #25272a;
+  
 }
 
 .dashboard {
@@ -23,33 +24,7 @@ body {
 
 .stats-h1 {
   color: white;
-}
-
-/* homepage */
-.home {
   text-align: center;
-  color: white;
-  font-size: 1.5em;
-  margin-top: 5%;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.home button {
-  color: rgb(0, 0, 0);
-  border: none;
-  margin-top: 20px;
-  padding: 5px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: border-color 0.3s ease;
-  font-size: 1em;
-}
-
-.home button:hover {
-  color: white;
-  background-color: #25272a;
-  border-color: #ffffff;
 }
 
 .vocab {
@@ -72,12 +47,12 @@ body {
   color: #ffffff;
   background-color: #1b1e20;
   border-radius: 10px;
-  width: 50%; 
+  width: 37.4%; 
   height: 45px;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 15px;
   text-align: left; 
-  padding-left: 40px; 
+  padding-left: 30px; 
   margin-left: auto;
   
 }
@@ -221,6 +196,7 @@ body {
   border-radius: 5px;
   font-family: Verdana, Geneva, sans-serif;
   padding: 5px; 
+  z-index: 10;
 }
 .edit-vocab button{
   color: white;
@@ -265,18 +241,18 @@ body {
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   z-index: 69;  
+  text-align: center;
 }
 .modal-input {
   border-width: 0px;
   color: #ffffff;
   background-color: #1b1e20;
   border-radius: 10px;
-  
-  height: 45px;
+  height: 35px;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 15px;
-  text-align: left; /* Changed from center to left */
-  padding-left: 40px; /* Added padding to make space for the icon */
+  text-align: center; 
+ 
 }
 .modal-dashboard-content {
   max-width: 480px;
@@ -289,16 +265,20 @@ body {
 }
 
 .modal-dashboard button {
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 11px 10px;
+  border-radius: 10px;
   cursor: pointer;
-  margin: auto;
+  margin-left: 10px;
+  border: 1px solid transparent;
+  background-color: #161819;
+  transition: background-color 0.3s ease;
 }
 
 .modal-dashboard button:hover{
-
+  background-color: #ffffff;
+  color: black;
 }
 
 
